@@ -11,6 +11,7 @@ body {
     overflow-x: hidden; /* Evita rolagem horizontal */
 }
 
+
 footer {
     background-color: #333;
     color: #fff;
@@ -21,9 +22,9 @@ footer {
     box-sizing: border-box; /* Evita problemas com padding/largura */
 }
 
-div {
-    margin-bottom: 15px;
-}
+
+
+
 
 .conteudo {
     background-color: rgba(255, 255, 255, 0.7);
@@ -34,8 +35,8 @@ div {
     text-align: center;
     flex-grow: 1;
     box-sizing: border-box; /* Inclui padding no cálculo do tamanho */
+    border-color: black;
 }
-
 
 /* Ajuste para o ícone do carrinho */
 #carrinho-icon {
@@ -47,11 +48,15 @@ div {
 }
 
 
+
+
+
 .campo {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 15px;
+    border: 1px solid #000000;
 }
 
 .campo label {
@@ -72,7 +77,7 @@ div {
     justify-content: center;
     background-color: #f0f0f0;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 3px solid #000000;
     border-radius: 5px;
     min-height: 50px;
 }
@@ -81,7 +86,6 @@ div {
     width: 180px;
     text-align: left;
 }
-
 
 
 
