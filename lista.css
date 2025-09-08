@@ -8,7 +8,8 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    overflow-x: hidden; /* Evita rolagem horizontal */
+    overflow-x: hidden;
+    /* Evita rolagem horizontal */
 }
 
 
@@ -19,7 +20,8 @@ footer {
     padding: 10px;
     font-size: 14px;
     width: 100%;
-    box-sizing: border-box; /* Evita problemas com padding/largura */
+    box-sizing: border-box;
+    /* Evita problemas com padding/largura */
 }
 
 
@@ -34,7 +36,8 @@ footer {
     margin: 20px auto;
     text-align: center;
     flex-grow: 1;
-    box-sizing: border-box; /* Inclui padding no cálculo do tamanho */
+    box-sizing: border-box;
+    /* Inclui padding no cálculo do tamanho */
     border-color: black;
 }
 
@@ -70,6 +73,26 @@ footer {
     padding: 5px;
 }
 
+.coluna {
+    padding: 10px;
+    margin: 5px;
+    display: inline-block;
+    vertical-align: top;
+    flex: 1 1 200px;
+    /* Flexível com mínimo de 200px */
+    margin: 10px;
+}
+
+.coluna p {
+    word-wrap: break-word;
+    /* Permite quebra de palavra longa */
+    white-space: normal;
+    /* Permite quebra de linha natural */
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+
 .lista-display {
     display: flex;
     flex-wrap: wrap;
@@ -88,5 +111,8 @@ footer {
 }
 
 
-
-
+#listaDisplay {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
