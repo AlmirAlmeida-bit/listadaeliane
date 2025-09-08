@@ -76,7 +76,7 @@ document.getElementById('exportarPdf').addEventListener('click', () => {
         styles: { fontSize: 12 }
     });
 
-    doc.save('lista_compras_eliane.pdf');
+    doc.save('lista_de_compras.pdf');
 });
 const carrinhoIcon = document.getElementById('carrinho-icon');
 document.addEventListener('mousemove', (e) => {
@@ -133,6 +133,7 @@ document.addEventListener('mousemove', (e) => {
         carrinhoIcon.style.display = 'none';
     }
 });
+
 
 
 
