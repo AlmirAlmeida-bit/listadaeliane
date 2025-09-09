@@ -131,7 +131,7 @@ document.getElementById('exportarPdf').addEventListener('click', () => {
   const doc = new jsPDF();
   doc.setFontSize(18);
   doc.setFont('helvetica', 'bold');
-  doc.text('LISTA DE COMPRAS DA ELIANE', 105, 15, { align: 'center' });
+  doc.text('LISTA DE COMPRAS', 105, 15, { align: 'center' });
   doc.setLineWidth(0.5);
   doc.line(10, 20, 200, 20);
   const bodyData = lista.map((elemento, index) => [ index + 1, elemento.item, `${elemento.quantidade} ${elemento.unidade}` ]);
@@ -145,3 +145,4 @@ document.getElementById('exportarPdf').addEventListener('click', () => {
   });
   doc.save('lista_de_compras.pdf');
 });
+
