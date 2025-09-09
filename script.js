@@ -146,3 +146,15 @@ document.getElementById('exportarPdf').addEventListener('click', () => {
   doc.save('lista_de_compras.pdf');
 });
 
+document.getElementById('editarUltimo').addEventListener('click', () => {
+  if (lista.length === 0) {
+    alert('Nenhum item na lista para editar.');
+    return;
+  }
+  const ultimoItem = lista[lista.length - 1];
+  document.getElementById('item').value = ultimoItem.item;
+  document.getElementById('quantidade').value = ultimoItem.quantidade;
+  document.querySelector(`input[name="unidade"][value="${ultimoItem.unidade}"]`).checked = true;
+  lista.pop(); // Remove o último item da lista
+  atualizarLista();
+});
