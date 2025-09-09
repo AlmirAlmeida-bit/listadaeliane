@@ -27,12 +27,6 @@ footer {
 }
 
 
-@media (max-width: 480px) {
-  .conteudo {
-    padding: 10px;
-  }
-}
-
 
 
 .conteudo {
@@ -136,5 +130,6 @@ h1 {
   text-align: center;
   word-wrap: break-word; /* Permite quebra se necessário */
 }
+
 
 
