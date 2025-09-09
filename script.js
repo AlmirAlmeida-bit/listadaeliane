@@ -2,82 +2,40 @@ let lista = [];
 let colunas = [];
 let itensPorColuna = 20;
 
-document.getElementById('adicionar').addEventListener('click', () => {
-    const item = document.getElementById('item').value.trim();
-    const quantidade = document.getElementById('quantidade').value;
 
-    if (item && quantidade && !isNaN(quantidade) && parseInt(quantidade) > 0) {
-        lista.push({ item, quantidade: parseInt(quantidade) });
-        atualizarLista();
-        document.getElementById('item').value = '';
-        document.getElementById('quantidade').value = '';
-    } else {
-        alert('Por favor, preencha item e uma quantidade válida.');
-    }
-});
+
+
 
 function atualizarLista() {
-    const listaDisplay = document.getElementById('listaDisplay');
-    listaDisplay.innerHTML = '';
-    colunas = [];
-    let colunaAtual = [];
-
-    lista.forEach((elemento, index) => {
-        colunaAtual.push(`${index + 1}. ${elemento.item} - Quantidade: ${elemento.quantidade}`);
-        if (colunaAtual.length >= itensPorColuna) {
-            colunas.push(colunaAtual);
-            colunaAtual = [];
-        }
-    });
-    if (colunaAtual.length > 0) {
-        colunas.push(colunaAtual);
+   
+  const listaDisplay = document.getElementById('listaDisplay');
+  listaDisplay.innerHTML = '';
+  colunas = [];
+  let colunaAtual = [];
+  lista.forEach((elemento, index) => {
+    // Mostra como: item quantidade unidade (ex: banana 4 kg)
+    const textoItem = `${elemento.item} ${elemento.quantidade} ${elemento.unidade}`;
+    colunaAtual.push(textoItem);
+    if (colunaAtual.length >= itensPorColuna) {
+      colunas.push(colunaAtual);
+      colunaAtual = [];
     }
-
-    colunas.forEach(coluna => {
-        const divColuna = document.createElement('div');
-        divColuna.className = 'coluna';
-        coluna.forEach(texto => {
-            const p = document.createElement('p');
-            p.textContent = texto;
-            divColuna.appendChild(p);
-        });
-        listaDisplay.appendChild(divColuna);
+  });
+  if (colunaAtual.length > 0) {
+    colunas.push(colunaAtual);
+  }
+  colunas.forEach(coluna => {
+    const divColuna = document.createElement('div');
+    divColuna.className = 'coluna';
+    coluna.forEach(texto => {
+      const p = document.createElement('p');
+      p.textContent = texto;
+      divColuna.appendChild(p);
     });
+    listaDisplay.appendChild(divColuna);
+  });
 }
 
-document.getElementById('exportarPdf').addEventListener('click', () => {
-    if (lista.length === 0) {
-        alert('Nenhum item na lista para exportar.');
-        return;
-    }
-
-    const { jsPDF } = jspdf;
-    const doc = new jsPDF();
-
-    doc.setFontSize(18);
-    doc.setFont('helvetica', 'bold');
-    doc.text('LISTA DE COMPRAS DA ELIANE', 105, 15, { align: 'center' });
-    doc.setLineWidth(0.5);
-    doc.line(10, 20, 200, 20);
-
-    // Preparar dados para a tabela
-    const bodyData = lista.map((elemento, index) => [
-        index + 1,
-        elemento.item,
-        elemento.quantidade
-    ]);
-
-    doc.autoTable({
-        head: [['Nº', 'Item', 'Quantidade']],
-        body: bodyData,
-        startY: 25,
-        theme: 'striped',
-        headStyles: { fillColor: [41, 128, 185], textColor: 255 },
-        styles: { fontSize: 12 }
-    });
-
-    doc.save('lista_de_compras.pdf');
-});
 const carrinhoIcon = document.getElementById('carrinho-icon');
 document.addEventListener('mousemove', (e) => {
     const offsetX = 10;
@@ -99,6 +57,7 @@ document.addEventListener('mousemove', (e) => {
         carrinhoIcon.style.display = 'none';
     }*/
 });
+
 document.addEventListener('mousemove', (e) => {
     const offsetX = 10;
     const offsetY = 10;
@@ -137,6 +96,52 @@ document.addEventListener('mousemove', (e) => {
 
 
 
+document.getElementById('adicionar').addEventListener('click', () => {
+  const item = document.getElementById('item').value.trim();
+  const quantidade = document.getElementById('quantidade').value;
+  const unidade = document.querySelector('input[name="unidade"]:checked').value;
+  if (item && quantidade && !isNaN(quantidade) && parseInt(quantidade) > 0) {
+    lista.push({ item, quantidade: parseInt(quantidade), unidade });
+    atualizarLista();
+    document.getElementById('item').value = '';
+    document.getElementById('quantidade').value = '';
+  } else {
+    alert('Por favor, preencha item e uma quantidade válida.');
+  }
+});
+
+
+const listaDisplay = document.getElementById('listaDisplay');
+  listaDisplay.innerHTML = '';
+  lista.forEach((elemento, index) => {
+    const coluna = document.createElement('div');
+    coluna.className = 'coluna';
+    coluna.innerHTML = `<p>${elemento.item}</p><p>${elemento.quantidade} ${elemento.unidade}</p>`;
+    listaDisplay.appendChild(coluna);
+  });
 
 
 
+document.getElementById('exportarPdf').addEventListener('click', () => {
+  if (lista.length === 0) {
+    alert('Nenhum item na lista para exportar.');
+    return;
+  }
+  const { jsPDF } = jspdf;
+  const doc = new jsPDF();
+  doc.setFontSize(18);
+  doc.setFont('helvetica', 'bold');
+  doc.text('LISTA DE COMPRAS DA ELIANE', 105, 15, { align: 'center' });
+  doc.setLineWidth(0.5);
+  doc.line(10, 20, 200, 20);
+  const bodyData = lista.map((elemento, index) => [ index + 1, elemento.item, `${elemento.quantidade} ${elemento.unidade}` ]);
+  doc.autoTable({
+    head: [['Nº', 'Item', 'Quantidade']],
+    body: bodyData,
+    startY: 25,
+    theme: 'striped',
+    headStyles: { fillColor: [41, 128, 185], textColor: 255 },
+    styles: { fontSize: 12 }
+  });
+  doc.save('lista_de_compras.pdf');
+});
