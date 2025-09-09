@@ -125,3 +125,28 @@ footer {
     flex-wrap: wrap;
     justify-content: center;
 }
+
+
+
+h1 {
+  font-size: 2em;
+  text-align: center;
+  word-wrap: break-word; /* Permite quebra se necessário */
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.6em;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.3em;
+  }
+}
+
+
+
+
