@@ -1,16 +1,18 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-image: url('IMGS/Fundo.png');
-    background-repeat: repeat;
-    background-size: auto;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    overflow-x: hidden;
-    /* Evita rolagem horizontal */
+  font-family: 'Epunda Sans', sans-serif;
+  color: black; /* demais textos pretos */
+  margin: 0;
+  padding: 0;
+  background-image: url('IMGS/Fundo.png');
+  background-repeat: repeat;
+  background-size: auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden; /* Evita rolagem horizontal */
 }
+
+
 
 
 footer {
@@ -39,6 +41,7 @@ footer {
     box-sizing: border-box;
     /* Inclui padding no cálculo do tamanho */
     border-color: black;
+    color: #000000;
 }
 
 /* Ajuste para o ícone do carrinho */
@@ -49,6 +52,12 @@ footer {
     height: auto;
     z-index: 1;
 }
+
+* {
+  color: #2133bc;
+  font-family: 'Epunda Sans', sans-serif;
+}
+
 
 
 
