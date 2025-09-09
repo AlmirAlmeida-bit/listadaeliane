@@ -60,9 +60,6 @@ footer {
 
 
 
-
-
-
 .campo {
     display: flex;
     justify-content: space-between;
@@ -112,6 +109,7 @@ footer {
     border: 3px solid #000000;
     border-radius: 5px;
     min-height: 50px;
+    
 }
 
 .coluna {
@@ -139,11 +137,33 @@ h1 {
   h1 {
     font-size: 1.6em;
   }
+  button {
+    font-size: 0.9em; /* Diminui fonte dos botões */
+    padding: 8px 12px; /* Ajusta padding dos botões */
+  }
 }
 
 @media (max-width: 480px) {
   h1 {
     font-size: 1.3em;
+  }
+  button {
+    font-size: 0.8em; /* Fonte ainda menor em telas muito pequenas */
+    padding: 6px 10px; /* Botões mais compactos */
+    width: 100%; /* Botões ocupam largura total */
+    margin: 5px 0; /* Espaçamento vertical */
+  }
+  .campo {
+    flex-direction: column; /* Campos empilham verticalmente */
+    align-items: flex-start;
+  }
+  .campo label {
+    width: auto; /* Ajusta label */
+    text-align: left;
+    margin-bottom: 5px;
+  }
+  .campo input {
+    width: 100%; /* Inputs ocupam largura total */
   }
 }
 
