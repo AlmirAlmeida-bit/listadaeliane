@@ -28,7 +28,6 @@ footer {
 
 
 
-
 h1 {
   font-size: 2.5rem; /* Tamanho padrão para telas maiores */
 }
@@ -44,6 +43,7 @@ h1 {
     font-size: 1.5rem; /* Tamanho ainda menor para celulares pequenos */
   }
 }
+
 
 
 
@@ -74,6 +74,9 @@ h1 {
   color: #2133bc;
   font-family: 'Epunda Sans', sans-serif;
 }
+
+
+
 
 
 
@@ -126,7 +129,6 @@ h1 {
     border: 3px solid #000000;
     border-radius: 5px;
     min-height: 50px;
-    
 }
 
 .coluna {
@@ -148,6 +150,20 @@ h1 {
   text-align: center;
   word-wrap: break-word; /* Permite quebra se necessário */
 }
+
+/* Responsivo */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.6em;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.3em;
+  }
+}
+
 
 
 
