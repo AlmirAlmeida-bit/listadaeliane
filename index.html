@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,64 +9,38 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.5.28/dist/jspdf.plugin.autotable.min.js"></script>
 </head>
-
 <body>
- <!---<div class="conteudo">
-        <h1>Lista de Compras da Eliane</h1>
-        
-<div class="campo">
-  <label for="item">Item:</label>
-  <input type="text" id="item">
-</div>
-<div class="campo">
-  <label for="quantidade">Quantidade:</label>
-  <input type="number" id="quantidade">
-</div>
-<div class="campo">
-  <label>Medida:</label>
-  <div class="unidade-opcoes">
-    <label><input type="radio" name="unidade" value="lt" checked> Lt</label>
-    <label><input type="radio" name="unidade" value="kg"> Kg </label>
-    <label><input type="radio" name="unidade" value="Unid"> Unid</label>
-  </div>
-</div>-->
-
-<div class="conteudo">
-    <h1>Lista de Compras da Eliane</h1>
-    <div class="campo">
-        <label for="item">Item:</label>
-        <input type="text" id="item">
-    </div>
-    <div class="campo">
-        <label for="quantidade">Quantidade:</label>
-        <input type="number" id="quantidade">
-    </div>
-    <div class="campo">
-        <label>Medida:</label>
-        <div class="unidade-opcoes">
-            <label><input type="radio" name="unidade" value="lt" checked> Lt</label>
-            <label><input type="radio" name="unidade" value="kg"> Kg </label>
-            <label><input type="radio" name="unidade" value="Unid"> Unid</label>
+    <div class="conteudo">
+        <h1 id="tituloLista">Lista de Compras da Eliane</h1>
+        <div class="campo">
+            <label for="nomeLista">Nome da Lista:</label>
+            <input type="text" id="nomeLista" maxlength="20">
         </div>
-    </div>
-    <button id="adicionar">Adicionar Item</button>
-    <button id="editarUltimo">Editar Último</button>
-    <button id="exportarPdf">Exportar para PDF</button>
-    <div class="lista-display" id="listaDisplay"></div>
-    <img id="carrinho-icon" src="IMGS/carrinho.png" style="position: absolute; pointer-events: none; width: 30px; height: auto; z-index: 1;">
-</div>
-
-       
-        
-
+        <div class="campo">
+            <label for="item">Item:</label>
+            <input type="text" id="item">
+        </div>
+        <div class="campo">
+            <label for="quantidade">Quantidade:</label>
+            <input type="number" id="quantidade">
+        </div>
+        <div class="campo">
+            <label>Medida:</label>
+            <div class="unidade-opcoes">
+                <label><input type="radio" name="unidade" value="lt" checked> Lt</label>
+                <label><input type="radio" name="unidade" value="kg"> Kg </label>
+                <label><input type="radio" name="unidade" value="Unid"> Unid</label>
+            </div>
+        </div>
+        <button id="adicionar">Adicionar Item</button>
+        <button id="editarUltimo">Editar</button>
+        <button id="exportarPdf">Gerar PDF</button>
+        <div class="lista-display" id="listaDisplay"></div>
+        <img id="carrinho-icon" src="IMGS/carrinho.png" style="position: absolute; pointer-events: none; width: 30px; height: auto; z-index: 1;">
     </div>
     <footer>
         &copy; 2025 trestech.com.br por Almir Almeida - Todos os direitos reservados.
     </footer>
     <script src="script.js"></script>
 </body>
-
 </html>
-
-
-
