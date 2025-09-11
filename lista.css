@@ -166,5 +166,23 @@ h1 {
 
 
 
+@media (max-width: 768px) {
+    #carrinho-icon {
+        display: none;
+    }
+    /* Outros ajustes responsivos já existentes */
+    h1 {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    /* O ícone já estará oculto pelo regra acima (max-width: 768px) */
+    /* Outros ajustes */
+    h1 {
+        font-size: 1.5rem;
+    }
+}
+
 
 
