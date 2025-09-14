@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trestech</title>
+  <title>Animação 3D Trestech.stl com Three.js</title>
   <style>
     body { margin: 0; overflow: hidden; }
     canvas { display: block; }
@@ -22,13 +21,12 @@
   <script type="module">
     import * as THREE from 'three';
     import { STLLoader } from 'three/addons/loaders/STLLoader.js';
-    import { TextureLoader } from 'three';
 
     // Cena básica
     const scene = new THREE.Scene();
 
     // Carregar textura de fundo
-    const textureLoader = new TextureLoader();
+    const textureLoader = new THREE.TextureLoader();
     textureLoader.load('IMGS/space.webp', (texture) => {
       scene.background = texture;
     }, undefined, (error) => {
@@ -43,21 +41,39 @@
     document.body.appendChild(renderer.domElement);
 
     // Luzes
-    scene.add(new THREE.AmbientLight(0x404040));
-    const light = new THREE.DirectionalLight(0xffffff, 1);
-    light.position.set(5, 5, 5);
-    scene.add(light);
+    scene.add(new THREE.AmbientLight(0x404040)); // Luz ambiente suave
+
+    // Adicionando spots de luz
+    const spotLight1 = new THREE.SpotLight(0xffffff, 1.5); // Luz branca intensa
+    spotLight1.position.set(5, 5, 5);
+    spotLight1.angle = Math.PI / 4; // Ângulo do cone de luz
+    spotLight1.penumbra = 0.2; // Suavidade da borda do cone
+    spotLight1.decay = 2; // Atenuação com distância
+    scene.add(spotLight1);
+
+    const spotLight2 = new THREE.SpotLight(0xffffaa, 1.0);
+    spotLight2.position.set(-5, 3, -3);
+    spotLight2.angle = Math.PI / 6;
+    spotLight2.penumbra = 0.3;
+    spotLight2.decay = 2;
+    scene.add(spotLight2);
 
     // Carregar STL
     const loader = new STLLoader();
     let mesh;
     loader.load('IMGS/Trestech.stl', (geometry) => {
       console.log('STL carregado!');
-      const material = new THREE.MeshPhongMaterial({ color: 0x88ccff, shininess: 100, side: THREE.DoubleSide });
+      const material = new THREE.MeshPhongMaterial({ 
+        color: 0x88ccff, 
+        shininess: 100, 
+        side: THREE.DoubleSide 
+      });
       mesh = new THREE.Mesh(geometry, material);
       mesh.scale.set(0.1, 0.1, 0.1);
       scene.add(mesh);
-    }, (xhr) => console.log(`Carregando: ${Math.round(xhr.loaded/xhr.total*100)}%`), (error) => console.error('Erro ao carregar STL:', error));
+    }, 
+    (xhr) => console.log(`Carregando: ${Math.round(xhr.loaded/xhr.total*100)}%`), 
+    (error) => console.error('Erro ao carregar STL:', error));
 
     // Animação
     function animate() {
