@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -5,8 +6,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Animação 3D Trestech.stl com Three.js</title>
   <style>
-    body { margin: 0; overflow: hidden; }
-    canvas { display: block; }
+    body { margin: 0; overflow: hidden; background: #000; display: flex; flex-direction: column; height: 100vh; }
+    canvas { display: block; flex: 1; }
+    footer {
+      background: rgba(0,0,0,0.7);
+      color: white;
+      text-align: center;
+      padding: 10px;
+      font-family: Arial, sans-serif;
+    }
+    footer a {
+      color: #88ccff;
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
@@ -22,60 +37,46 @@
     import * as THREE from 'three';
     import { STLLoader } from 'three/addons/loaders/STLLoader.js';
 
-    // Cena básica
     const scene = new THREE.Scene();
 
-    // Carregar textura de fundo
     const textureLoader = new THREE.TextureLoader();
-    textureLoader.load('IMGS/space.webp', (texture) => {
-      scene.background = texture;
-    }, undefined, (error) => {
-      console.error('Erro ao carregar textura de fundo:', error);
-    });
+    textureLoader.load(
+      'IMGS/space.webp',
+      (texture) => {
+        scene.background = texture;
+      },
+      undefined,
+      (error) => {
+        console.error('Erro ao carregar textura:', error);
+      }
+    );
 
-    const camera = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, 0.1, 1000);
+    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.position.set(0, 0, 10);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
 
-    // Luzes
-    scene.add(new THREE.AmbientLight(0x404040)); // Luz ambiente suave
+    scene.add(new THREE.AmbientLight(0x404040));
+    const light = new THREE.DirectionalLight(0xffffff, 1);
+    light.position.set(5, 5, 5);
+    scene.add(light);
 
-    // Adicionando spots de luz
-    const spotLight1 = new THREE.SpotLight(0xffffff, 1.5); // Luz branca intensa
-    spotLight1.position.set(5, 5, 5);
-    spotLight1.angle = Math.PI / 4; // Ângulo do cone de luz
-    spotLight1.penumbra = 0.2; // Suavidade da borda do cone
-    spotLight1.decay = 2; // Atenuação com distância
-    scene.add(spotLight1);
-
-    const spotLight2 = new THREE.SpotLight(0xffffaa, 1.0);
-    spotLight2.position.set(-5, 3, -3);
-    spotLight2.angle = Math.PI / 6;
-    spotLight2.penumbra = 0.3;
-    spotLight2.decay = 2;
-    scene.add(spotLight2);
-
-    // Carregar STL
     const loader = new STLLoader();
     let mesh;
-    loader.load('IMGS/Trestech.stl', (geometry) => {
-      console.log('STL carregado!');
-      const material = new THREE.MeshPhongMaterial({ 
-        color: 0x88ccff, 
-        shininess: 100, 
-        side: THREE.DoubleSide 
-      });
-      mesh = new THREE.Mesh(geometry, material);
-      mesh.scale.set(0.1, 0.1, 0.1);
-      scene.add(mesh);
-    }, 
-    (xhr) => console.log(`Carregando: ${Math.round(xhr.loaded/xhr.total*100)}%`), 
-    (error) => console.error('Erro ao carregar STL:', error));
+    loader.load(
+      'IMGS/Trestech.stl',
+      (geometry) => {
+        const material = new THREE.MeshPhongMaterial({ color: 0x88ccff, shininess: 100 });
+        mesh = new THREE.Mesh(geometry, material);
+        mesh.scale.set(0.1, 0.1, 0.1);
+        scene.add(mesh);
+      },
+      (xhr) => console.log(`Carregando: ${Math.round(xhr.loaded/xhr.total*100)}%`),
+      (error) => console.error('Erro ao carregar STL:', error)
+    );
 
-    // Animação
     function animate() {
       requestAnimationFrame(animate);
       if (mesh) mesh.rotation.y += 0.01;
@@ -83,12 +84,15 @@
     }
     animate();
 
-    // Resize
     window.addEventListener('resize', () => {
-      camera.aspect = window.innerWidth/window.innerHeight;
+      camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
     });
   </script>
+  <footer>
+    Visite <a href="3tech.html">trestech.com.br</a> para mais informações.
+  </footer>
 </body>
 </html>
+
