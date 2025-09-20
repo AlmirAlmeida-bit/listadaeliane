@@ -1,116 +1,142 @@
 
-// Declaração de variáveis globais
-let lista = []; // Armazena os itens da lista de compras
-let colunas = []; // Armazena as colunas da lista de compras
-let itensPorColuna = 20; // Define o número de itens por coluna
+let lista = [];
+let colunas = [];
+let itensPorColuna = 20;
 
-// Função para atualizar o título da lista na tela
+// Atualiza o título da lista na tela
 function atualizarTituloLista() {
-  // Obtém o valor do campo de texto do nome da lista
-  const nomeLista = document.getElementById('nomeLista').value.trim() || 'Lista de Compras da Eliane';
-  // Atualiza o texto do título da lista
-  document.getElementById('tituloLista').textContent = nomeLista;
+    const nomeLista = document.getElementById('nomeLista').value.trim() || 'Lista de Compras da Eliane';
+    document.getElementById('tituloLista').textContent = nomeLista;
 }
 
-// Função para atualizar a lista de compras na tela
 function atualizarLista() {
-  // Atualiza o título da lista
-  atualizarTituloLista();
-  
-  // Obtém o elemento da lista de compras
-  const listaDisplay = document.getElementById('listaDisplay');
-  // Limpa o conteúdo da lista de compras
-  listaDisplay.innerHTML = '';
-  
-  // Reinicializa as colunas
-  colunas = [];
-  let colunaAtual = [];
-  
-  // Percorre os itens da lista de compras
-  lista.forEach((elemento, index) => {
-    // Formata o texto do item
-    const textoItem = `${elemento.item} ${elemento.quantidade} ${elemento.unidade}`;
-    // Adiciona o item à coluna atual
-    colunaAtual.push(textoItem);
-    
-    // Verifica se a coluna atual atingiu o limite de itens
-    if (colunaAtual.length >= itensPorColuna) {
-      // Adiciona a coluna atual à lista de colunas
-      colunas.push(colunaAtual);
-      // Reinicializa a coluna atual
-      colunaAtual = [];
-    }
-  });
-  
-  // Verifica se há itens restantes na coluna atual
-  if (colunaAtual.length > 0) {
-    // Adiciona a coluna atual à lista de colunas
-    colunas.push(colunaAtual);
-  }
-  
-  // Percorre as colunas
-  colunas.forEach(coluna => {
-    // Cria um elemento div para a coluna
-    const divColuna = document.createElement('div');
-    divColuna.className = 'coluna';
-    
-    // Percorre os itens da coluna
-    coluna.forEach(texto => {
-      // Cria um elemento p para o item
-      const p = document.createElement('p');
-      p.textContent = texto;
-      // Adiciona o item à coluna
-      divColuna.appendChild(p);
+    atualizarTituloLista();
+    const listaDisplay = document.getElementById('listaDisplay');
+    listaDisplay.innerHTML = '';
+    colunas = [];
+    let colunaAtual = [];
+    lista.forEach((elemento, index) => {
+        const textoItem = `${elemento.item} ${elemento.quantidade} ${elemento.unidade}`;
+        colunaAtual.push(textoItem);
+        if (colunaAtual.length >= itensPorColuna) {
+            colunas.push(colunaAtual);
+            colunaAtual = [];
+        }
     });
-    
-    // Adiciona a coluna à lista de compras
-    listaDisplay.appendChild(divColuna);
-  });
+    if (colunaAtual.length > 0) {
+        colunas.push(colunaAtual);
+    }
+    colunas.forEach(coluna => {
+        const divColuna = document.createElement('div');
+        divColuna.className = 'coluna';
+        coluna.forEach(texto => {
+            const p = document.createElement('p');
+            p.textContent = texto;
+            divColuna.appendChild(p);
+        });
+        listaDisplay.appendChild(divColuna);
+    });
 }
 
-// Obtém o ícone do carrinho
 const carrinhoIcon = document.getElementById('carrinho-icon');
-
-// Adiciona um evento de movimento do mouse
 document.addEventListener('mousemove', (e) => {
-  // Define os offsets do ícone
-  const offsetX = 10;
-  const offsetY = 10;
-  
-  // Obtém o elemento da conteúdo
-  const conteudo = document.querySelector('.conteudo');
-  // Obtém as dimensões do conteúdo
-  const rect = conteudo.getBoundingClientRect();
-  // Obtém as dimensões da janela
-  const windowWidth = window.innerWidth;
-  const windowHeight = window.innerHeight;
-  // Obtém as dimensões do ícone
-  const iconWidth = carrinhoIcon.offsetWidth;
-  const iconHeight = carrinhoIcon.offsetHeight;
-  
-  // Verifica se o mouse está fora do conteúdo
-  if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) {
-    // Calcula a posição do ícone
-    let posX = e.pageX + offsetX;
-    let posY = e.pageY + offsetY;
-    posX = Math.min(posX, windowWidth - iconWidth - 5);
-    posY = Math.min(posY, windowHeight - iconHeight - 5);
-    posX = Math.max(posX, 5);
-    posY = Math.max(posY, 5);
-    
-    // Atualiza a posição do ícone
-    carrinhoIcon.style.left = `${posX}px`;
-    carrinhoIcon.style.top = `${posY}px`;
-    carrinhoIcon.style.display = 'block';
-  } else {
-    // Esconde o ícone
-    carrinhoIcon.style.display = 'none';
-  }
+    const offsetX = 10;
+    const offsetY = 10;
+    const conteudo = document.querySelector('.conteudo');
+    const rect = conteudo.getBoundingClientRect();
+    const windowWidth = window.innerWidth;
+    const windowHeight = window.innerHeight;
+    const iconWidth = carrinhoIcon.offsetWidth;
+    const iconHeight = carrinhoIcon.offsetHeight;
+    if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) {
+        let posX = e.pageX + offsetX;
+        let posY = e.pageY + offsetY;
+        posX = Math.min(posX, windowWidth - iconWidth - 5);
+        posY = Math.min(posY, windowHeight - iconHeight - 5);
+        posX = Math.max(posX, 5);
+        posY = Math.max(posY, 5);
+        carrinhoIcon.style.left = `${posX}px`;
+        carrinhoIcon.style.top = `${posY}px`;
+        carrinhoIcon.style.display = 'block';
+    } else {
+        carrinhoIcon.style.display = 'none';
+    }
 });
 
-// Adiciona um evento de clique ao botão de adicionar
 document.getElementById('adicionar').addEventListener('click', () => {
-  // Obtém os valores dos campos de texto
-  const item = document.getElementById('item').value.trim();
-  const quantidade
+    const item = document.getElementById('item').value.trim();
+    const quantidade = document.getElementById('quantidade').value;
+    const unidade = document.querySelector('input[name="unidade"]:checked').value;
+    if (item && quantidade && !isNaN(quantidade) && parseInt(quantidade) > 0) {
+        lista.push({ item, quantidade: parseInt(quantidade), unidade });
+        atualizarLista();
+        document.getElementById('item').value = '';
+        document.getElementById('quantidade').value = '';
+    } else {
+        alert('Por favor, preencha item e uma quantidade válida.');
+    }
+});
 
+document.getElementById('editarUltimo').addEventListener('click', () => {
+    if (lista.length === 0) {
+        alert('Nenhum item para editar.');
+        return;
+    }
+    const ultimoItem = lista[lista.length - 1];
+    document.getElementById('item').value = ultimoItem.item;
+    document.getElementById('quantidade').value = ultimoItem.quantidade;
+    document.querySelector(`input[name="unidade"][value="${ultimoItem.unidade}"]`).checked = true;
+    lista.pop();
+    atualizarLista();
+});
+
+document.getElementById('nomeLista').addEventListener('input', atualizarTituloLista);
+
+document.getElementById('exportarPdf').addEventListener('click', () => {
+    if (lista.length === 0) {
+        alert('Nenhum item na lista para exportar.');
+        return;
+    }
+    const nomeLista = document.getElementById('nomeLista').value.trim() || 'Lista de Compras';
+    const { jsPDF } = jspdf;
+    const doc = new jsPDF();
+    doc.setFontSize(18);
+    doc.setFont('helvetica', 'bold');
+    doc.text(nomeLista.toUpperCase(), 105, 15, { align: 'center' });
+    doc.setLineWidth(0.5);
+    doc.line(10, 20, 200, 20);
+const bodyData = lista.map((elemento, index) => [
+    index + 1,
+    elemento.item,
+    `${elemento.quantidade} ${elemento.unidade}`
+]);
+doc.autoTable({
+    head: [['Nº', 'Item', 'Quantidade']],
+    body: bodyData,
+    startY: 25,
+    theme: 'striped',
+    headStyles: { fillColor: [41, 128, 185], textColor: 255 },
+    styles: { fontSize: 12 }
+});
+doc.save(`${nomeLista.replace(/\s+/g, '_').toLowerCase()}.pdf`);
+});
+
+
+window.addEventListener('load', () => {
+    lista = [];
+    atualizarLista();
+    document.getElementById('nomeLista').value = '';
+    document.getElementById('item').value = '';
+    document.getElementById('quantidade').value = '';
+    document.querySelector('input[name="unidade"][value="lt"]').checked = true;
+});
+
+
+window.addEventListener('load', () => {
+    lista = [];
+    document.getElementById('nomeLista').value = '';
+    document.getElementById('item').value = '';
+    document.getElementById('quantidade').value = '';
+    document.querySelector('input[name="unidade"][value="lt"]').checked = true;
+    atualizarLista(); // Isso vai chamar atualizarTituloLista() e definir o título padrão
+});
