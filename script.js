@@ -1,5 +1,3 @@
-Aqui está o seu código comentado:
-
 
 // Declaração de variáveis globais
 let lista = []; // Armazena os itens da lista de compras
@@ -115,3 +113,4 @@ document.getElementById('adicionar').addEventListener('click', () => {
   // Obtém os valores dos campos de texto
   const item = document.getElementById('item').value.trim();
   const quantidade
+
